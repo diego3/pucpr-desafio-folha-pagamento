@@ -1,0 +1,6 @@
+concursado;2094;2;4000.00
+concursado;2938;3;5000.00
+concursado;2192;4;1300.00
+concursado;1009;1;1500.00
+concursado;1939;1;1000.00
+temporario;2300;2;2300.00
