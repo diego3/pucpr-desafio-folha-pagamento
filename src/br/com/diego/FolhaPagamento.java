@@ -14,13 +14,11 @@ public class FolhaPagamento {
 	}
 	
 	protected Double calculaTotal() {
-//		Double total = 0.0;
-//		for(Funcionario f: this.funcionarios) {
-//			total += f.calculaValorMensal();
-//		}
-//		return total;
-		
-		return funcionarios.stream().map((f) -> f.calculaValorMensal()).reduce(Double::sum).orElse(0.0).doubleValue();
+		Double total = 0.0;
+		for(Funcionario f: this.funcionarios) {
+			total += f.calculaValorMensal();
+		}
+		return total;
 	}
 	
 	protected void imprimeFuncionarios() {

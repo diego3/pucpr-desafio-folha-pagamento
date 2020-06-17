@@ -21,21 +21,14 @@ public class Funcionario {
 		return 0.0;
 	}
 	
-	protected Integer total;
 	public Integer getNumeroDependentesValidos(Integer idadeLimite) {
-		//Integer total = 0;
-//		for(Dependente dep : this.dependentes) {
-//			if(dep.isValid(idadeLimite)) {
-//				total++;
-//			}
-//		}
-//		return total;
-		
-		return dependentes.stream().filter(d -> d.getIdade()<=idadeLimite)
-				.map((d) -> 1)
-				.reduce(Integer::sum)
-				.orElse(0)
-				.intValue();
+		Integer total = 0;
+		for(Dependente dep : this.dependentes) {
+			if(dep.isValid(idadeLimite)) {
+				total++;
+			}
+		}
+		return total;
 	}
 	
 	public ArrayList<Dependente> getDependentes(){
