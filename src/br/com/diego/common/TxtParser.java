@@ -9,7 +9,7 @@ import br.com.diego.FuncionarioTemporario;
 
 public class TxtParser {
 	
-	public static ArrayList<Funcionario> parserFuncionarios(String filePath) {
+	public static ArrayList<Funcionario> parseFuncionarios(String filePath) {
 		ArrayList<String> content = TxtReader.readFile(filePath);
 		ArrayList<Funcionario> funcionarios = new ArrayList<>();
 		for(String line : content) {
@@ -31,9 +31,16 @@ public class TxtParser {
 		return funcionarios;
 	}
 	
-	public static ArrayList<Funcionario> dependentes(String funcionariosPath, String dependentesPath){
+	/**
+	 * 
+	 * @param funcionariosPath
+	 * @param dependentesPath
+	 * @param quantidadeDependentes
+	 * @return ArrayList<Funcionario>
+	 */
+	public static ArrayList<Funcionario> parse(String funcionariosPath, String dependentesPath, int quantidadeDependentes){
 		ArrayList<String> dependentesString = TxtReader.readFile(dependentesPath);
-		ArrayList<Funcionario> funcionarios = TxtParser.parserFuncionarios(funcionariosPath);
+		ArrayList<Funcionario> funcionarios = TxtParser.parseFuncionarios(funcionariosPath);
 		
 		if(dependentesString.isEmpty()) {
 			return funcionarios;
@@ -45,9 +52,9 @@ public class TxtParser {
 			
 			Integer idade = Integer.valueOf(parts[1]);	
 			Dependente dependente = new Dependente(idade);
-			for(Funcionario fun : funcionarios) {
-				if(fun.getCodigo().equals(codigoFuncionario)) {
-					fun.AddDependente(dependente);
+			for(Funcionario funcionario : funcionarios) {
+				if(funcionario.getCodigo().equals(codigoFuncionario) && funcionario.getDependentes().size() < quantidadeDependentes) {
+					funcionario.AddDependente(dependente);
 				}
 			}
 		}

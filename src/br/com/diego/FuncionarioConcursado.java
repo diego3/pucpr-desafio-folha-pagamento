@@ -5,6 +5,10 @@ public class FuncionarioConcursado extends Funcionario {
 	protected Double gratificacao = 200.0;
 	protected Integer anosContratacao;
 	
+	public FuncionarioConcursado() {
+		super();
+	}
+	
 	public FuncionarioConcursado(Integer codigo, Double salarioBase, Integer anosContratacao) {
 		super(codigo, salarioBase);
 		this.anosContratacao = anosContratacao;
@@ -24,6 +28,14 @@ public class FuncionarioConcursado extends Funcionario {
 	
 	public Integer getAnosContratacao() {
 		return anosContratacao;
+	}
+	
+	public void setAnosContratacao(Integer anosContratacao) {
+		this.anosContratacao = anosContratacao;
+	}
+	
+	public void setGratificacao(Double valor) {
+		this.gratificacao = valor;
 	}
 	
 	@Override

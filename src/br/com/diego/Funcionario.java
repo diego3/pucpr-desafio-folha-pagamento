@@ -1,37 +1,42 @@
 package br.com.diego;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Funcionario {
 	
 	protected Integer codigo;
+	
 	protected Double  salarioBase;
 	
 	protected ArrayList<Dependente> dependentes;
 	
-	Funcionario(Integer codigo, Double salarioBase){
+	public Funcionario() {
+		this.codigo = 0;
+		this.salarioBase = 0.0;
+		dependentes = new ArrayList<>();
+	}
+	
+	public Funcionario(Integer codigo, Double salarioBase){
 		this.codigo = codigo;
 		this.salarioBase = salarioBase;
 		dependentes = new ArrayList<>();
 	}
 	
 	public Double calculaValorMensal() {
-		
 		return 0.0;
 	}
 	
 	public Integer getNumeroDependentesValidos(Integer idadeLimite) {
 		Integer total = 0;
-		for(Dependente dep : this.dependentes) {
-			if(dep.isValid(idadeLimite)) {
+		for(Dependente dependente : this.dependentes) {
+			if(dependente.isValid(idadeLimite)) {
 				total++;
 			}
 		}
 		return total;
 	}
 	
-	public ArrayList<Dependente> getDependentes(){
+	public ArrayList<Dependente> getDependentes() {
 		return this.dependentes;
 	}
 	
@@ -57,13 +62,11 @@ public class Funcionario {
 		return salarioBase;
 	}
 	
-//	@Override
-//	public String toString() {
-//		return String.format("Codigo:%d Salário:%.2f Dependentes: %d", 
-//				this.codigo, 
-//				this.salarioBase.floatValue(),
-//				this.dependentes.size()
-//		);
-//	}
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
+	}
 	
+	public void setSalarioBase(Double salarioBase) {
+		this.salarioBase = salarioBase;
+	}
 }

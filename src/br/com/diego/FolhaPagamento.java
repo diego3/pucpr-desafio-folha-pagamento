@@ -1,13 +1,14 @@
 package br.com.diego;
 
 import java.util.ArrayList;
-
-import br.com.diego.common.TxtParser;
+import br.com.diego.common.FuncionarioReaderFactory;
+import br.com.diego.common.FuncionarioReaderInterface;
 
 public class FolhaPagamento {
 	
-	// passo 1
 	protected ArrayList<Funcionario> funcionarios;
+	protected static int NUMERO_MAXIMO_DEPENDENTES = 5;
+	protected static int NUMERO_MAXIMO_FUNCIONARIOS = 100;
 	
 	FolhaPagamento(ArrayList<Funcionario> funcionarios){
 		this.funcionarios = funcionarios;
@@ -15,8 +16,8 @@ public class FolhaPagamento {
 	
 	protected Double calculaTotal() {
 		Double total = 0.0;
-		for(Funcionario f: this.funcionarios) {
-			total += f.calculaValorMensal();
+		for(Funcionario funcionario: funcionarios) {
+			total += funcionario.calculaValorMensal();
 		}
 		return total;
 	}
@@ -26,17 +27,15 @@ public class FolhaPagamento {
 	}
 	
 	public static void main(String[] args) {
-		ArrayList<Funcionario> funcionarios = TxtParser.dependentes(
-				"src/br/com/diego/common/funcionarios.txt", 
-				"src/br/com/diego/common/dependentes.txt"
-		);
+		FuncionarioReaderInterface reader = FuncionarioReaderFactory.createKeyboardReader(NUMERO_MAXIMO_DEPENDENTES, NUMERO_MAXIMO_FUNCIONARIOS);
+		//FuncionarioReaderInterface reader = FuncionarioReaderFactory.createTextFileReader(NUMERO_MAXIMO_DEPENDENTES);
+		
+		ArrayList<Funcionario> funcionarios = reader.read();
 		FolhaPagamento folha = new FolhaPagamento(funcionarios);
 		
-		// passo 2
-		Double salarioTotal = folha.calculaTotal();
-		System.out.println(String.format("Total folha de pagamento: %.2f", salarioTotal));
+		Double total = folha.calculaTotal();
+		System.out.println(String.format("Total folha de pagamento: %.2f", total));
 		
-		// passo 3
 		folha.imprimeFuncionarios();
 	}
 
